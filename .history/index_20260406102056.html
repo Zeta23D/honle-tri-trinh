@@ -1,0 +1,555 @@
+<!DOCTYPE html> 
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Cao Trí & Tố Trinh - Wedding Invitation</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <style>
+            :root {
+                --dark-red: #5e0000;
+                --gold: #d4af37;
+                --gold-light: #f4e0af;
+                --gold-gradient: linear-gradient(
+                    45deg,
+                    #bf953f,
+                    #fcf6ba,
+                    #b38728,
+                    #fbf5b7,
+                    #aa771c
+                );
+                --glass: rgba(20, 0, 0, 0.85);
+                --white: #fff;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                font-family: "Montserrat", sans-serif;
+                background-color: var(--dark-red);
+                background-image: radial-gradient(
+                    circle at center,
+                    #8b0000 0%,
+                    #3a0000 100%
+                );
+                color: var(--white);
+                overflow-x: hidden;
+                line-height: 1.6;
+            }
+
+            /* Họa tiết gấm chìm */
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: url("https://www.transparenttextures.com/patterns/black-linen.png");
+                opacity: 0.3;
+                z-index: -1;
+            }
+
+            #loader {
+                position: fixed;
+                inset: 0;
+                background: #1a0000;
+                z-index: 10000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 1s ease-in-out;
+            }
+            .loader-circle {
+                width: 60px;
+                height: 60px;
+                border: 2px solid var(--gold);
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* HERO SECTION - Đã sửa lỗi hiển thị ảnh mobile */
+            .hero {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 20px;
+                background: linear-gradient(
+                        rgba(0, 0, 0, 0.4),
+                        rgba(0, 0, 0, 0.4)
+                    ),
+                    url("anh_5.jpg"); /* Ảnh nền đầu tiên */
+                background-size: cover;
+                background-position: center top; /* Giữ ưu tiên phần đầu ảnh (mặt người) */
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+
+            /* Tắt background-attachment: fixed trên mobile để tránh lỗi zoom ảnh */
+            @media (max-width: 768px) {
+                .hero {
+                    background-attachment: scroll;
+                    background-size: cover;
+                }
+                .couple-name h1 {
+                    font-size: 3.5rem !important;
+                }
+            }
+
+            .couple-name {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                margin: 20px 0;
+                flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+            }
+            .couple-name h1 {
+                font-family: "Great Vibes", cursive;
+                font-size: clamp(3.5rem, 10vw, 5.5rem);
+                background: var(--gold-gradient);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+                display: inline-block;
+            }
+            .ampersand {
+                font-family: "Playfair Display", serif;
+                font-size: 3rem;
+                color: var(--gold);
+                margin-top: -10px;
+            }
+
+            .section {
+                padding: 60px 15px;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .glass-card {
+                background: var(--glass);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+                padding: 40px 20px;
+                border-radius: 20px;
+                text-align: center;
+                position: relative;
+                margin-bottom: 30px;
+            }
+
+            .wedding-title {
+                font-family: "Playfair Display", serif;
+                font-size: 1.8rem;
+                color: var(--gold);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 30px;
+            }
+
+            .family-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 30px;
+                margin: 30px 0;
+            }
+            .family-box b {
+                font-size: 1.3rem;
+                color: var(--gold);
+                display: block;
+                margin-top: 5px;
+            }
+
+            .highlight-time {
+                border-top: 1px solid var(--gold);
+                border-bottom: 1px solid var(--gold);
+                padding: 20px 0;
+                margin: 30px 0;
+            }
+            .highlight-time h2 {
+                font-size: 4rem;
+                font-family: "Playfair Display", serif;
+                color: var(--gold);
+            }
+
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            @media (min-width: 768px) {
+                .gallery-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            @media (min-width: 1024px) {
+                .gallery-grid {
+                    grid-template-columns: repeat(4, 1fr); /* Hiển thị 4 cột trên màn hình lớn */
+                }
+            }
+
+            .gallery-item {
+                aspect-ratio: 3/4;
+                overflow: hidden;
+                border: 3px solid #fff;
+                transition: transform 0.3s ease;
+            }
+            .gallery-item:hover {
+                transform: scale(1.05);
+                z-index: 2;
+            }
+            .gallery-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .btn-luxury {
+                display: inline-block;
+                padding: 15px 35px;
+                background: var(--gold-gradient);
+                color: #000;
+                text-decoration: none;
+                font-weight: bold;
+                border-radius: 30px;
+                margin-top: 20px;
+                text-transform: uppercase;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .btn-luxury:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            }
+
+            /* Music Button */
+            .music-control {
+                position: fixed;
+                bottom: 25px;
+                right: 25px;
+                z-index: 9999;
+                width: 50px;
+                height: 50px;
+                background: var(--gold-gradient);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            }
+            .playing {
+                animation: rotate 4s linear infinite;
+            }
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Banking Section */
+            .banking-info {
+                margin-top: 20px;
+                border-top: 1px dashed rgba(212, 175, 55, 0.5);
+                padding-top: 20px;
+                text-align: left;
+                display: inline-block; /* Để căn giữa khối text */
+            }
+            .banking-info p {
+                margin-bottom: 5px;
+            }
+            .banking-info b {
+                color: var(--gold-light);
+            }
+        </style>
+    </head>
+    <body onclick="firstClick()">
+        <div id="loader">
+            <div class="loader-circle"></div>
+            <p
+                style="
+                    color: var(--gold);
+                    margin-top: 15px;
+                    letter-spacing: 3px;
+                "
+            >
+                ĐANG TẢI THIỆP...
+            </p>
+        </div>
+
+        <canvas
+            id="canvas"
+            style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: 1;
+            "
+        ></canvas>
+
+        <div class="music-control" id="musicBtn" onclick="toggleMusic(event)">
+            <span id="music-icon" style="font-size: 20px">🎵</span>
+            <audio id="bg-music" loop>
+                <source
+                    src="https://www.bensound.com/bensound-music/bensound-love.mp3"
+                    type="audio/mpeg"
+                />
+            </audio>
+        </div>
+
+        <section class="hero">
+            <div class="hero-content reveal">
+                <p style="letter-spacing: 5px; color: var(--gold-light); text-transform: uppercase;">
+                    Trân trọng kính mời
+                </p>
+                <div class="couple-name">
+                    <h1>Cao Trí</h1>
+                    <span class="ampersand">&</span>
+                    <h1>Tố Trinh</h1>
+                </div>
+                <p style="font-size: 1.5rem; font-family: 'Playfair Display'">
+                    06 . 2026
+                </p>
+                <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8">
+                    Chạm màn hình để nghe nhạc
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="glass-card reveal">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic;">
+                    "[ 𝐆𝐨́𝐜 𝐦𝐨̛̀𝐢 đ𝐚́𝐦 𝐜𝐮̛𝐨̛́𝐢 𝒐𝒏𝒍𝒊𝒏𝒆 ] 💌<br>
+                    𝑻𝒉𝒊𝒆̣̂𝒑 𝒎𝒐̛̀𝒊 𝒐𝒏𝒍𝒊𝒏𝒆 – 𝒕𝒉𝒂𝒚 𝒄𝒉𝒐 𝒏𝒉𝒖̛̃𝒏𝒈 𝒕𝒂̂́𝒎 𝒕𝒉𝒊𝒆̣̂𝒑 𝒉𝒐̂̀𝒏𝒈 𝒄𝒉𝒖̛𝒂 𝒌𝒊̣𝒑 𝒕𝒓𝒂𝒐 𝒕𝒂𝒚 💌"
+                </p>
+                
+                <h2 class="wedding-title">💍 Happy Wedding 💍</h2>
+                
+                <p style="max-width: 600px; margin: 0 auto 30px; line-height: 1.8;">
+                    𝑻𝒓𝒂̂𝒏 𝒕𝒓𝒐̣𝒏𝒈 𝒌𝒊́𝒏𝒉 𝒎𝒐̛̀𝒊 𝒒𝒖𝒚́ 𝑪𝒐̂, 𝑫𝒊̀, 𝑪𝒉𝒖́, 𝑩𝒂́𝒄, 𝑨𝒏𝒉, 𝑪𝒉𝒊̣, 𝑬𝒎, 𝑩𝒂̣𝒏 𝑩𝒆̀ 𝒈𝒂̂̀𝒏 𝒙𝒂 𝒕𝒐̛́𝒊 𝒅𝒖ự đ𝒂́𝒎 𝒄𝒖̛𝒐̛́𝒊 𝒄𝒖̉𝒂 𝒗𝒐̛̣, 𝒄𝒉𝒐̂̀𝒏𝒈, 𝒄𝒐𝒏, 𝒆𝒎🥂
+                </p>
+
+                <h2 class="wedding-title" style="margin-top: 40px;">Lễ Vu Quy</h2>
+                
+                <div class="highlight-time">
+                    <p>ĐƯỢC BẮT ĐẦU VÀO LÚC</p>
+                    <h2>09:00</h2>
+                    <p>Ngày ...... tháng 06 năm 2026</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">(𝐓𝐮̛́𝐜 𝐧𝐠𝐚̀𝐲 ..... 𝐭𝐡𝐚́𝐧𝐠 4 Âm Lịch)</p>
+                </div>
+
+                <p style="font-size: 1rem; color: var(--gold-light);">
+                    🏠 Địa chỉ: Tư gia nhà gái
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="wedding-title" style="text-align: center">
+                Album Hình Ảnh
+            </h2>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal"><img src="anh_1.jpg" alt="Ảnh cưới 1" /></div>
+                <div class="gallery-item reveal"><img src="anh_2.jpg" alt="Ảnh cưới 2" /></div>
+                <div class="gallery-item reveal"><img src="anh_3.jpg" alt="Ảnh cưới 3" /></div>
+                <div class="gallery-item reveal"><img src="anh_4.jpg" alt="Ảnh cưới 4" /></div>
+                <div class="gallery-item reveal"><img src="anh_5.jpg" alt="Ảnh cưới 5" /></div>
+                <div class="gallery-item reveal"><img src="anh_6.jpg" alt="Ảnh cưới 6" /></div>
+                <div class="gallery-item reveal"><img src="anh_7.jpg" alt="Ảnh cưới 7" /></div>
+                <div class="gallery-item reveal"><img src="anh_8.jpg" alt="Ảnh cưới 8" /></div>
+                <div class="gallery-item reveal"><img src="anh_9.jpg" alt="Ảnh cưới 9" /></div>
+                <div class="gallery-item reveal"><img src="anh_10.jpg" alt="Ảnh cưới 10" /></div>
+                <div class="gallery-item reveal"><img src="anh_11.jpg" alt="Ảnh cưới 11" /></div>
+                <div class="gallery-item reveal"><img src="anh_12.jpg" alt="Ảnh cưới 12" /></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div
+                class="glass-card reveal"
+                style="border: 2px solid var(--gold)"
+            >
+                <h2 class="wedding-title">Tiệc Rượu</h2>
+                <p>🎉 Buổi tiệc gia đình tổ chức tại tư gia nhà gái vào lúc:</p>
+                
+                <div
+                    class="highlight-time"
+                    style="background: rgba(212, 175, 55, 0.1)"
+                >
+                    <h2>19:00</h2>
+                    <p>Ngày ...... tháng 06 năm 2026</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">(𝐓𝐮̛́𝐜 𝐧𝐠𝐚̀𝐲 ..... 𝐭𝐡𝐚́𝐧𝐠 4 Âm Lịch)</p>
+                </div>
+                
+                <p style="font-size: 1rem; margin-bottom: 15px;">
+                    🏠 Địa chỉ : Ấp An Quới - xã Quới An- tỉnh Vĩnh Long
+                </p>
+
+                <p style="font-size: 0.9rem; opacity: 0.8; font-style: italic; max-width: 600px; margin: 20px auto;">
+                    ✨ Do công tác chuẩn bị bận rộn không thể đưa thiệp mời đến tận tay từng người được, nên cháu, con, em xin được gửi lời mời tới tất cả mọi người thông qua bài viết này. Nếu có thiếu sót gì mong mọi người thông cảm và bỏ qua.
+                </p>
+
+                <p style="font-size: 1.1rem; color: var(--gold); margin: 20px 0; font-weight: 600;">
+                    “𝐒𝐮̛̣ 𝐜𝐨́ 𝐦𝐚̣̆𝐭 𝐜𝐮̉𝐚 𝐦𝐨̣𝐢 𝐧𝐠𝐮̛𝐨̛̀𝐢 𝐜𝐡𝐢́𝐧𝐡 𝐥𝐚̀ 𝐧𝐢𝐞̂̀𝐦 𝐡𝐚̣𝐧𝐡 𝐩𝐡𝐮́𝐜 𝐜𝐮̉𝐚 𝐯𝐨̛̣ 𝐜𝐡𝐨̂̀𝐧𝐠 𝐞𝐦 “. 🥰
+                </p>
+
+                <p style="font-family: 'Playfair Display'; font-size: 1.3rem; color: var(--gold-light);">
+                    𝐑𝐚̂́𝐭 𝐇𝐚̂𝐧 𝐇𝐚̣𝐧𝐡 Đ𝐮̛𝐨̛̣𝐜 Đ𝐨́𝐧 𝐓𝐢𝐞̂́𝐩 !
+                </p>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=Ấp+An+Quới+xã+Quới+An+tỉnh+Vĩnh+Long"
+                    target="_blank"
+                    class="btn-luxury"
+                >
+                    📍 Chỉ đường trên bản đồ
+                </a>
+
+                <div class="banking-info reveal">
+                    <p>💌 Mọi lời chúc tốt đẹp và những món quà ý nghĩa xin gửi về:</p>
+                    <p><b>Cô Dâu 👰</b></p>
+                    <p>Chủ TK: <b>LÊ THỊ TỐ TRINH</b></p>
+                    <p>NGÂN HÀNG : <b>VIETCOMBANK ĐỒNG THÁP</b></p>
+                    <p>STK: <b>...............</b></p> </div>
+
+            </div>
+        </section>
+
+        <footer
+            style="
+                text-align: center;
+                padding: 40px;
+                opacity: 0.6;
+                font-size: 0.9rem;
+                border-top: 1px solid rgba(212, 175, 55, 0.2);
+            "
+        >
+            CAO TRÍ & TỐ TRINH • 2026<br>
+            Thank you for being part of our special day!
+        </footer>
+
+        <script>
+            // Xử lý nhạc nền
+            const music = document.getElementById("bg-music");
+            const musicBtn = document.getElementById("musicBtn");
+            let hasInteracted = false;
+
+            function firstClick() {
+                if (!hasInteracted) {
+                    music
+                        .play()
+                        .catch((e) => console.log("Chưa thể phát nhạc tự động, cần tương tác người dùng"));
+                    musicBtn.classList.add("playing");
+                    document.getElementById("music-icon").innerText = "⏸";
+                    hasInteracted = true;
+                }
+            }
+
+            function toggleMusic(e) {
+                e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài body
+                if (music.paused) {
+                    music.play();
+                    musicBtn.classList.add("playing");
+                    document.getElementById("music-icon").innerText = "⏸";
+                } else {
+                    music.pause();
+                    musicBtn.classList.remove("playing");
+                    document.getElementById("music-icon").innerText = "🎵";
+                }
+            }
+
+            // Loader & Animation
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const loader = document.getElementById("loader");
+                    if(loader) {
+                        loader.style.opacity = "0";
+                        setTimeout(() => {
+                            loader.style.display = "none";
+                        }, 1000);
+                    }
+                }, 1000);
+            });
+
+            // ScrollReveal configuration
+            ScrollReveal().reveal(".reveal", {
+                distance: "30px",
+                duration: 1000,
+                interval: 100,
+                origin: "bottom",
+                viewFactor: 0.2
+            });
+
+            // Hiệu ứng bụi vàng lấp lánh (Canvas)
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            let particles = [];
+
+            function initCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5; // Kích thước hạt nhỏ hơn tí
+                    this.speed = Math.random() * 0.5 + 0.1; // Tốc độ rơi chậm hơn
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                update() {
+                    this.y += this.speed; // Rơi xuống thay vì bay lên
+                    if (this.y > canvas.height) this.reset();
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Tạo số lượng hạt phù hợp
+            const particleCount = Math.min(70, Math.floor(window.innerWidth / 10));
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p) => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateParticles);
+            }
+
+            initCanvas();
+            animateParticles();
+            window.addEventListener("resize", initCanvas);
+        </script>
+    </body>
+</html>
