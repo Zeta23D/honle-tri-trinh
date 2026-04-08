@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wedding Invitation - Cao Trí & Tố Trinh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg-color: #fcfaf7;
+    --accent: #d4af37; /* Champagne Gold */
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.8);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* === LOADING SCREEN === */
+#preloader {
+    position: fixed; inset: 0; background: var(--bg-color);
+    z-index: 9999; display: flex; align-items: center; justify-content: center;
+}
+.loader-heart {
+    font-size: 50px; color: var(--accent);
+    animation: heartBeat 1.2s infinite;
+}
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+/* === HERO SECTION === */
+.hero {
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover; background-attachment: fixed;
+    background-position: center;
+}
+
+.hero-content {
+    background: var(--glass);
+    padding: 60px 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 2px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.hero h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase; letter-spacing: 5px;
+    font-size: 0.8rem; color: var(--accent); margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    margin: 20px 0; font-weight: 400;
+}
+
+.hero p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 1.2rem;
+    letter-spacing: 3px;
+}
+
+/* === SECTION BASE === */
+section { padding: 100px 20px; text-align: center; max-width: 1200px; margin: 0 auto; }
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; margin-bottom: 50px;
+    position: relative; padding-bottom: 20px;
+}
+.section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%); width: 60px; height: 2px;
+    background: var(--accent);
+}
+
+/* === STORY / INVITATION === */
+.invitation-box {
+    background: var(--white);
+    padding: 80px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+.invitation-box p {
+    line-height: 2; font-size: 1.1rem; color: var(--text-light);
+    max-width: 700px; margin: 0 auto 30px;
+}
+
+/* === TIMELINE === */
+.timeline {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    margin-top: 50px;
+}
+.event-card {
+    background: var(--white); padding: 40px;
+    border-radius: 12px; border-bottom: 4px solid var(--accent);
+    transition: transform 0.3s ease;
+}
+.event-card:hover { transform: translateY(-10px); }
+.event-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; }
+.event-card .time { font-size: 2rem; color: var(--accent); font-weight: 200; margin-bottom: 10px; }
+.event-card .place { font-weight: 500; margin-bottom: 5px; }
+.event-card .address { font-size: 0.9rem; color: var(--text-light); }
+
+/* === RSVP BUTTON === */
+.btn-primary {
+    display: inline-block; padding: 15px 40px;
+    background: var(--accent); color: white;
+    text-decoration: none; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: 2px;
+    font-size: 0.8rem; transition: all 0.3s ease;
+    border: none; cursor: pointer; margin-top: 20px;
+}
+.btn-primary:hover {
+    background: var(--text-dark);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* === MUSIC === */
+.music-control {
+    position: fixed; bottom: 30px; right: 30px; z-index: 100;
+    background: var(--white); width: 50px; height: 50px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer;
+}
+
+/* === ANIMATION === */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    .timeline { grid-template-columns: 1fr; }
+    .hero-content { padding: 40px 20px; width: 90%; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+    <div class="loader-heart">❤</div>
+</div>
+
+<div class="music-control" onclick="toggleMusic()">
+    <span id="musicIcon">🎵</span>
+</div>
+<audio id="weddingMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="page-wrapper">
+    <header class="hero">
+        <div class="hero-content reveal">
+            <h2>The Wedding Celebration</h2>
+            <h1>Cao Trí & Tố Trinh</h1>
+            <p>20 . 06 . 2026</p>
+        </div>
+    </header>
+
+    <section id="invitation">
+        <div class="reveal">
+            <h2 class="section-title">Lời Ngỏ</h2>
+            <div class="invitation-box">
+                <p>
+                    “Yêu là cùng nhau xây đắp, cùng nhau già đi...”<br>
+                    Sau những năm tháng gắn bó, chúng mình đã quyết định cùng nhau bước sang một trang mới của cuộc đời.
+                </p>
+                <p>
+                    Trân trọng kính mời quý ân nhân, bạn bè đến chung vui và chúc phúc cho lễ thành hôn của hai chúng mình.
+                </p>
+                <a href="#rsvp" class="btn-primary">Xác nhận tham dự</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <h2 class="section-title reveal">Lịch Trình Buổi Lễ</h2>
+        <div class="timeline">
+            <div class="event-card reveal">
+                <h3>Lễ Vu Quy</h3>
+                <div class="time">09:00</div>
+                <p class="place">Tư Gia Nhà Gái</p>
+                <p class="address">Ấp An Quới, xã Quới An, tỉnh Vĩnh Long</p>
+            </div>
+            <div class="event-card reveal">
+                <h3>Tiệc Cưới</h3>
+                <div class="time">18:00</div>
+                <p class="place">Trung Tâm Hội Nghị</p>
+                <p class="address">Sảnh Diamond - Số 123 Đường Hạnh Phúc</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <div class="reveal">
+            <h2 class="section-title">Xác Nhận Tham Dự</h2>
+            <p style="margin-bottom: 30px;">Để việc đón tiếp được chu đáo nhất, bạn hãy phản hồi giúp chúng mình nhé!</p>
+            <form style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <input type="text" placeholder="Họ và tên của bạn" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;">
+                <select style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;">
+                    <option>Bạn sẽ tham dự chứ?</option>
+                    <option>Chắc chắn tham dự</option>
+                    <option>Rất tiếc không thể đến</option>
+                </select>
+                <button type="button" class="btn-primary" style="width: 100%;" onclick="alert('Cảm ơn bạn đã phản hồi!')">Gửi Phản Hồi</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; background: #fff; text-align: center; border-top: 1px solid #eee;">
+        <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--accent);">Thank You</h2>
+        <p style="margin-top: 10px; font-size: 0.8rem; letter-spacing: 2px;">CAO TRÍ & TỐ TRINH • 2026</p>
+    </footer>
+</div>
+
+<script>
+// Preloader
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.style.display = 'none', 500);
+    }, 1500);
+});
+
+// Scroll Reveal
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        }
+    }
+}
+window.addEventListener("scroll", reveal);
+
+// Music Toggle
+const music = document.getElementById('weddingMusic');
+const musicIcon = document.getElementById('musicIcon');
+let isPlaying = false;
+
+function toggleMusic() {
+    if (isPlaying) {
+        music.pause();
+        musicIcon.textContent = '🔇';
+    } else {
+        music.play();
+        musicIcon.textContent = '🎵';
+    }
+    isPlaying = !isPlaying;
+}
+
+// Gọi reveal lần đầu để hiện content hero
+reveal();
+</script>
+
+</body>
+</html>
