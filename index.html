@@ -365,21 +365,37 @@
         const musicBtn = document.getElementById("musicBtn");
         let isPlaying = false;
 
+        function playMusic() {
+            if (!isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    document.getElementById("musicIcon").textContent = "🎵";
+                    musicBtn.classList.add("playing");
+                }).catch(error => {
+                    console.log("Trình duyệt chặn tự động phát, chờ tương tác...");
+                });
+            }
+        }
+
+        // Mẹo: Kích hoạt nhạc ngay khi người dùng CUỘN TRANG hoặc CHẠM
+        window.addEventListener('scroll', playMusic, { once: true });
+        window.addEventListener('click', playMusic, { once: true });
+        window.addEventListener('touchstart', playMusic, { once: true });
+
+        // Hàm cho nút bấm thủ công
         function toggleMusic() {
             if (isPlaying) {
                 music.pause();
                 document.getElementById("musicIcon").textContent = "🔇";
                 musicBtn.classList.remove("playing");
+                isPlaying = false;
             } else {
                 music.play();
                 document.getElementById("musicIcon").textContent = "🎵";
                 musicBtn.classList.add("playing");
+                isPlaying = true;
             }
-            isPlaying = !isPlaying;
         }
-
-        // Tự động phát khi chạm vào màn hình lần đầu
-        document.addEventListener('click', () => { if (!isPlaying) toggleMusic(); }, { once: true });
     </script>
 </body>
 
